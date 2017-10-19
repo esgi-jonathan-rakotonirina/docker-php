@@ -1,0 +1,18 @@
+version: "3.1"
+services:
+
+    php-app:
+        build: .
+        container_name: my-php-container
+        ports:
+            - "6686:80"
+        working_dir: /application
+        volumes:
+            - .:/var/www/html
+    mysql-app:
+        image: mysql
+        links:
+            - php-app:mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+#docker-compose up -d
